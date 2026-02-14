@@ -27,5 +27,12 @@ public final class Constants {
     public static final int FRONT_LEFT_ENCODER = 6;
     public static final int FRONT_RIGHT_ENCODER = 7;
 
+    public static final double wheelRadius = 50; //mm //TODO
+
+    public static final double pulsePerRevolution = 1440;
+
+    public static final double gearRatio = 1/1;
+    public static final double encoderPulseRatio = pulsePerRevolution * gearRatio;
+
     public static final double DIST_PER_TICK = (Math.PI * 2 * wheelRadius) / encoderPulseRatio;
 }
