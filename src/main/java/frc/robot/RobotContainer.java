@@ -6,16 +6,22 @@
 /*----------------------------------------------------------------------------*/
 
 package frc.robot;
-
-import edu.wpi.first.wpilibj.GenericHID;
-import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.Commands.Teleop;
+import frc.robot.subsystems.DriveTrain;
+import gamepad.OI;
 
 
 public class RobotContainer {
+  public static DriveTrain driveTrain;
+  public static OI oi;
   
   public RobotContainer() {
-    // Configure the button bindings
+    driveTrain = new DriveTrain();
+    oi = new OI();
+    
+    driveTrain.setDefaultCommand(new Teleop());
+    
     configureButtonBindings();
   }
 

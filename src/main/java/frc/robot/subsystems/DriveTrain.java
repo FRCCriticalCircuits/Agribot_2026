@@ -93,7 +93,7 @@ public class DriveTrain extends SubsystemBase {
         motor.setVoltage(voltage);
     }
 
-    public static void resetEncoders(){
+    public void resetEncoders(){
         rearLeftEncoder.reset();
         rearRightEncoder.reset();
         frontLeftEncoder.reset();
