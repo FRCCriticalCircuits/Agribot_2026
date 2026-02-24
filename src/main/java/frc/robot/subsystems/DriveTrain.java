@@ -11,6 +11,7 @@ import com.kauailabs.navx.frc.AHRS;
 import com.studica.frc.TitanQuad;
 import com.studica.frc.TitanQuadEncoder;
 
+import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -24,6 +25,7 @@ public class DriveTrain extends SubsystemBase {
     private TitanQuad frontLeft_motor;
     private TitanQuad frontRight_motor;
     // Sensor
+    private AHRS navX; 
     // Encoders
     private static TitanQuadEncoder rearLeftEncoder;
     private static TitanQuadEncoder rearRightEncoder;
@@ -65,7 +67,8 @@ public class DriveTrain extends SubsystemBase {
         rearRightEncoder = new TitanQuadEncoder(rearRight_motor, Constants.REARRIGHT_ID, Constants.DIST_PER_TICK);
         frontLeftEncoder = new TitanQuadEncoder(frontLeft_motor, Constants.FRONTLEFT_ID, Constants.DIST_PER_TICK);
         frontRightEncoder = new TitanQuadEncoder(frontRight_motor, Constants.FRONTRIGHT_ID, Constants.DIST_PER_TICK);
-
+        navX = new AHRS(SPI.Port.kMXP);
+        
         // Encoder Direction
         rearLeftEncoder.setReverseDirection();
         frontLeftEncoder.setReverseDirection();
@@ -87,7 +90,7 @@ public class DriveTrain extends SubsystemBase {
         robotDrive = new MecanumDrive(frontLeft_motor, rearLeft_motor, frontRight_motor, rearRight_motor);
         robotDrive.setDeadband(0.05);
 
-        
+        resetEncoders();
     }
 
     public void setMotorSpeed(TitanQuad motor, double voltage){
@@ -102,7 +105,7 @@ public class DriveTrain extends SubsystemBase {
     }
 
     public void resetYaw(){
-
+        navX.reset();
     }
 
     public void drive(double x, double y, double z){
