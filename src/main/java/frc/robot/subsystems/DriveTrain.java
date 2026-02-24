@@ -7,6 +7,7 @@
 
 package frc.robot.subsystems;
 
+import com.kauailabs.navx.frc.AHRS;
 import com.studica.frc.TitanQuad;
 import com.studica.frc.TitanQuadEncoder;
 
@@ -22,7 +23,7 @@ public class DriveTrain extends SubsystemBase {
     private TitanQuad rearRight_motor;
     private TitanQuad frontLeft_motor;
     private TitanQuad frontRight_motor;
-
+    // Sensor
     // Encoders
     private static TitanQuadEncoder rearLeftEncoder;
     private static TitanQuadEncoder rearRightEncoder;
@@ -30,7 +31,7 @@ public class DriveTrain extends SubsystemBase {
     private static TitanQuadEncoder frontRightEncoder;
 
     private MecanumDrive robotDrive;
-
+    
     public DriveTrain() {
         rearLeft_motor = new TitanQuad(Constants.TITAN_CAN_ID,Constants.REARLEFT_ID);
         rearRight_motor = new TitanQuad(Constants.TITAN_CAN_ID,Constants.REARRIGHT_ID);

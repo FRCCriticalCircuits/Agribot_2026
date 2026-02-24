@@ -3,7 +3,7 @@ package frc.Commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.DriveTrain;
-import gamepad.OI;
+import frc.gamepad.OI;
 
 public class Teleop extends CommandBase{
     private static final DriveTrain driveTrain = RobotContainer.driveTrain;

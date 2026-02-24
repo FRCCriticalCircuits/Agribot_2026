@@ -1,4 +1,4 @@
-package gamepad;
+package frc.gamepad;
 
 import edu.wpi.first.wpilibj.Joystick;
 

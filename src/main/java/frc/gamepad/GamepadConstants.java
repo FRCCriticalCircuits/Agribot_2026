@@ -1,4 +1,4 @@
-package gamepad;
+package frc.gamepad;
 
 public class GamepadConstants {
     public static final int USB_PORT = 0;
