@@ -67,8 +67,13 @@ public class DriveTrain extends SubsystemBase {
         rearRightEncoder = new TitanQuadEncoder(rearRight_motor, Constants.REARRIGHT_ID, Constants.DIST_PER_TICK);
         frontLeftEncoder = new TitanQuadEncoder(frontLeft_motor, Constants.FRONTLEFT_ID, Constants.DIST_PER_TICK);
         frontRightEncoder = new TitanQuadEncoder(frontRight_motor, Constants.FRONTRIGHT_ID, Constants.DIST_PER_TICK);
+
         navX = new AHRS(SPI.Port.kMXP);
-        
+        System.out.println("NavX Connected: " + navX.isConnected());
+        System.out.println("NavX Calibrating: " + navX.isCalibrating());
+        System.out.println("NavX Firmware Version: " + navX.getFirmwareVersion());
+
+
         // Encoder Direction
         rearLeftEncoder.setReverseDirection();
         frontLeftEncoder.setReverseDirection();
@@ -91,6 +96,7 @@ public class DriveTrain extends SubsystemBase {
         robotDrive.setDeadband(0.05);
 
         resetEncoders();
+        navX.reset();
     }
 
     public void setMotorSpeed(TitanQuad motor, double voltage){
@@ -102,6 +108,10 @@ public class DriveTrain extends SubsystemBase {
         rearRightEncoder.reset();
         frontLeftEncoder.reset();
         frontRightEncoder.reset();
+    }
+
+    public void getYaw(){
+        navX.getYaw();
     }
 
     public void resetYaw(){
@@ -145,6 +155,12 @@ public class DriveTrain extends SubsystemBase {
     }
     @Override
     public void periodic() {
+        SmartDashboard.putNumber("NavX Pitch", navX.getPitch());
+        SmartDashboard.putNumber("NavX Roll", navX.getRoll());
+        SmartDashboard.putNumber("NavX Yaw", navX.getYaw());
+        SmartDashboard.putBoolean("NavX Connected", navX.isConnected());
+        SmartDashboard.putNumber("NavX Update Rate", navX.getActualUpdateRate());
+
         SmartDashboard.putNumber("Rear Left Encoder", getLeftBackEncoderDistance());
         SmartDashboard.putNumber("Rear Left RPM", getLeftRearRPM());
 
